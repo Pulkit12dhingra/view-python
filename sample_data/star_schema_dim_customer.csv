@@ -1,0 +1,11 @@
+customer_id,customer_name,segment,region,loyalty_tier
+1,Customer 1,Consumer,East,Gold
+2,Customer 2,SMB,Central,Silver
+3,Customer 3,Enterprise,West,Bronze
+4,Customer 4,Corporate,West,Platinum
+5,Customer 5,Corporate,West,Platinum
+6,Customer 6,SMB,West,Gold
+7,Customer 7,Consumer,East,Silver
+8,Customer 8,Enterprise,North,Platinum
+9,Customer 9,Consumer,Central,Gold
+10,Customer 10,Consumer,East,Silver

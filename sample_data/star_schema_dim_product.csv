@@ -1,0 +1,5 @@
+product_id,product_category,brand,is_perishable
+1,Electronics,ACME,False
+2,Furniture,HomeCraft,False
+3,Clothing,UrbanWear,False
+4,Grocery,FreshFields,True

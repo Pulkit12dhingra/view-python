@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notebook DAG Viewer</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Notebook DAG Viewer</h1>
+      <p>Upload a <code>.ipynb</code>, edit any cell, and run the whole workflow.</p>
+    </header>
+
+    <section class="controls">
+      <form id="upload-form">
+        <input type="file" id="file-input" accept=".ipynb" />
+        <button type="submit">Upload Notebook</button>
+      </form>
+      <button id="sample-btn" title="Render a small sample DAG">Try Sample</button>
+      <button id="run-all-btn" title="Run all cells sequentially">Run All</button>
+    </section>
+
+    <main>
+      <div id="graph"></div>
+
+      <aside id="details">
+        <h2>Cell</h2>
+
+        <label for="editor" class="muted">Code (editable; not saved yet)</label>
+        <textarea id="editor" spellcheck="false" placeholder="Select a node to view/edit its code"></textarea>
+
+        <div class="button-row">
+          <button id="apply-btn" disabled>Apply Change</button>
+        </div>
+
+        <h3>Run Output</h3>
+        <pre id="run-output"><em>Click “Run All” to execute cells sequentially.</em></pre>
+      </aside>
+    </main>
+
+    <footer>
+      <small>Empty cells are ignored. Running executes cells in order using a shared state (like Jupyter).</small>
+    </footer>
+
+    <script type="module" src="/static/app.js"></script>
+  </body>
+</html>
