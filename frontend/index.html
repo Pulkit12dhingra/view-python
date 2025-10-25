@@ -8,25 +8,51 @@
     <script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
   </head>
   <body>
+    <!-- Top Nav -->
+    <nav class="menubar">
+      <div class="menu">
+        <button class="menu-trigger">File</button>
+        <div class="menu-list">
+          <label class="menu-item">
+            <input type="file" id="file-input" accept=".ipynb" hidden />
+            <span id="menu-upload">Upload Notebook…</span>
+          </label>
+          <button class="menu-item" id="menu-new-ws">New Workspace</button>
+        </div>
+      </div>
+
+      <div class="menu">
+        <button class="menu-trigger">Edit</button>
+        <div class="menu-list">
+          <button class="menu-item" id="menu-add-node">Add Node</button>
+          <button class="menu-item" id="menu-del-node">Delete Selected Node</button>
+          <div class="menu-sep"></div>
+          <button class="menu-item" id="menu-add-conn">Add Connection</button>
+          <button class="menu-item" id="menu-del-conn">Delete Connection</button>
+        </div>
+      </div>
+
+      <div class="menu">
+        <button class="menu-trigger">Run</button>
+        <div class="menu-list">
+          <button class="menu-item" id="menu-run-cell">Run Selected Cell</button>
+          <button class="menu-item" id="menu-run-all">Run Entire Workflow</button>
+        </div>
+      </div>
+    </nav>
+
     <header>
-      <h1>Notebook DAG Viewer</h1>
-      <p>Upload a <code>.ipynb</code>, edit any cell, and run the whole workflow.</p>
+      <h1>View-Python</h1>
+      <p>Helps to view the flow of code and make updations</p>
     </header>
 
-    <section class="controls">
-      <form id="upload-form">
-        <input type="file" id="file-input" accept=".ipynb" />
-        <button type="submit">Upload Notebook</button>
-      </form>
-      <button id="sample-btn" title="Render a small sample DAG">Try Sample</button>
-      <button id="run-all-btn" title="Run all cells sequentially">Run All</button>
-    </section>
-
     <main>
-      <div id="graph"></div>
+      <div id="graph" class="workspace"></div>
 
       <aside id="details">
         <h2>Cell</h2>
+
+        <div class="muted" id="io-badges"></div>
 
         <label for="editor" class="muted">Code (editable; not saved yet)</label>
         <textarea id="editor" spellcheck="false" placeholder="Select a node to view/edit its code"></textarea>
@@ -36,13 +62,30 @@
         </div>
 
         <h3>Run Output</h3>
-        <pre id="run-output"><em>Click “Run All” to execute cells sequentially.</em></pre>
+        <pre id="run-output"><em>Use the Run menu or right-click the canvas for quick actions.</em></pre>
       </aside>
     </main>
 
     <footer>
-      <small>Empty cells are ignored. Running executes cells in order using a shared state (like Jupyter).</small>
+      <small>Empty cells are ignored. Topology determines execution order; disconnected groups run in isolated environments.</small>
     </footer>
+
+    <!-- Right-click context menu on the workspace plane -->
+    <div id="ctx" class="ctx hidden">
+      <div class="ctx-group">
+        <div class="ctx-title">Edit</div>
+        <button class="ctx-item" id="ctx-add-node">Add Node</button>
+        <button class="ctx-item" id="ctx-del-node">Delete Selected Node</button>
+        <button class="ctx-item" id="ctx-add-conn">Add Connection</button>
+        <button class="ctx-item" id="ctx-del-conn">Delete Connection</button>
+      </div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-group">
+        <div class="ctx-title">Run</div>
+        <button class="ctx-item" id="ctx-run-cell">Run Selected Cell</button>
+        <button class="ctx-item" id="ctx-run-all">Run Entire Workflow</button>
+      </div>
+    </div>
 
     <script type="module" src="/static/app.js"></script>
   </body>
